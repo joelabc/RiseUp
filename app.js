@@ -830,12 +830,6 @@ function initResumeBuilder() {
     const oldDividers = paper.querySelectorAll('.ats-page-divider');
     oldDividers.forEach(d => d.remove());
 
-    // On mobile devices (<= 768px), allow fluid paper height to fit phone screens cleanly
-    if (window.innerWidth <= 768) {
-      paper.style.minHeight = 'auto';
-      return;
-    }
-
     // Standard letter height is 11in at 96 DPI = 1056px
     const PAGE_HEIGHT = 1056;
     paper.style.minHeight = '1056px';
@@ -917,37 +911,54 @@ function initResumeBuilder() {
     }
   });
 
-  // Print / Save as PDF Button inside preview modal
-  if (printBtn) {
-    printBtn.addEventListener('click', () => {
-      syncEmployersFromDOM();
-      updatePreview();
-      const firstName = getResumeFirstName();
-      document.title = `${firstName} - Resume.pdf`;
-      window.print();
-    });
-  }
+  let originalViewportContent = null;
 
-  // Automatically sync and refresh preview if user invokes native print (Cmd+P / Ctrl+P)
-  window.addEventListener('beforeprint', () => {
+  function preparePrintEnvironment() {
     syncEmployersFromDOM();
     updatePreview();
     const firstName = getResumeFirstName();
     document.title = `${firstName} - Resume.pdf`;
+
+    // Temporarily set viewport meta tag to desktop width (1024px) so mobile browsers render full desktop layout during print
+    const viewportMeta = document.querySelector('meta[name="viewport"]');
+    if (viewportMeta && !originalViewportContent) {
+      originalViewportContent = viewportMeta.getAttribute('content');
+      viewportMeta.setAttribute('content', 'width=1024, initial-scale=1.0');
+    }
+
     const paper = document.getElementById('resume-preview-document');
     if (paper) {
       paper.style.minHeight = '0';
       const dividers = paper.querySelectorAll('.ats-page-divider');
       dividers.forEach(d => d.remove());
     }
-  });
+  }
 
-  window.addEventListener('afterprint', () => {
+  function restorePrintEnvironment() {
+    const viewportMeta = document.querySelector('meta[name="viewport"]');
+    if (viewportMeta && originalViewportContent) {
+      viewportMeta.setAttribute('content', originalViewportContent);
+      originalViewportContent = null;
+    }
     updatePreviewPaperPagination();
     if (!resumeModal || !resumeModal.classList.contains('active')) {
       restoreAppDocumentTitle();
     }
-  });
+  }
+
+  // Print / Save as PDF Button inside preview modal
+  if (printBtn) {
+    printBtn.addEventListener('click', () => {
+      preparePrintEnvironment();
+      window.print();
+      // Safety restoration timeout for mobile browsers where afterprint may not fire immediately
+      setTimeout(restorePrintEnvironment, 1500);
+    });
+  }
+
+  // Automatically sync and refresh preview if user invokes native print (Cmd+P / Ctrl+P)
+  window.addEventListener('beforeprint', preparePrintEnvironment);
+  window.addEventListener('afterprint', restorePrintEnvironment);
 
   window.addEventListener('resize', () => {
     if (resumeModal && resumeModal.classList.contains('active')) {
