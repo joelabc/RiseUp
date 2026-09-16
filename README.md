@@ -1,4 +1,4 @@
-# RiseUp 🌿 | Peaceful Layoff Recovery & ATS Resume Sanctuary
+# RiseUp 🌿 
 
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
@@ -113,11 +113,11 @@ A modern web browser supporting ES6 JavaScript and CSS Grid:
 ### Option A: Direct Browser Launch (No Installation)
 1. Clone or download this repository:
    ```bash
-   git clone https://github.com/your-username/peaceful_layoff_resource.git
+   git clone https://github.com/joelabc/riseUp.git
    ```
 2. Navigate into the directory:
    ```bash
-   cd peaceful_layoff_resource
+   cd riseUp
    ```
 3. Double-click `index.html` or open it directly in your browser:
    * **macOS**: `open index.html`
@@ -219,7 +219,7 @@ When saved, your browser will automatically propose `<YourFirstName> - Resume.pd
 ## 📁 Project Architecture & Directory Structure
 
 ```
-peaceful_layoff_resource/
+riseUp/
 ├── index.html           # Semantic single-page application structure
 ├── styles.css           # Comprehensive design system, theme tokens, and print engine
 ├── app.js               # Reactive logic, audio synthesis, resume pagination, and title hooks
