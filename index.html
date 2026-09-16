@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RiseUp</title>
+  <meta name="description"
+    content="A peaceful, reassuring, and evidence-based resource to help professionals navigate job loss with calm, clarity, structured reflection, and an interactive ATS resume builder.">
+
+  <!-- Favicon & App Icons (RiseUp Logo) -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Color Scheme & Dark Mode Initialization -->
+  <meta name="color-scheme" content="dark light">
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('sanctuary-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
+
+  <!-- Application Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ==========================================================================
+       MAIN HEADER & ONE-LINE HIGH-CONTRAST NAVIGATION
+       ========================================================================== -->
+  <header class="main-header" id="main-header">
+    <div class="container header-container">
+      <a href="#hero" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+        <span>RiseUp</span>
+      </a>
+
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link active">Home</a></li>
+          <li><a href="#resilience-hub" class="nav-link">Steps</a></li>
+          <li><a href="#video-gallery" class="nav-link">Videos</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="breathing-btn" id="breathing-btn" title="4:4:4:4 Box Breathing Exercise">
+          <i class="fa-solid fa-wind"></i> <span>Breathe</span>
+        </button>
+        <button class="audio-btn" id="audio-toggle-btn" title="Toggle Calming Ambient Audio">
+          <i class="fa-solid fa-volume-high"></i> <span>Sounds</span>
+        </button>
+        <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle Color Theme">
+          <i class="fa-solid fa-moon"></i> <span id="theme-btn-label">Dark</span>
+        </button>
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Navigation Menu"
+          aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Ambient Sound Controls Panel -->
+  <div class="audio-controls-panel" id="audio-panel">
+    <div class="audio-controls-header">
+      <div>
+        <span>Calming Soundscapes</span>
+        <small style="color: var(--text-muted); display: block; font-size: 0.72rem;">Web Audio API</small>
+      </div>
+      <button class="audio-panel-close-btn" id="audio-panel-close-btn" aria-label="Close Sounds Panel">&times;</button>
+    </div>
+    <button class="audio-option-btn selected" data-sound="off">
+      <i class="fa-solid fa-volume-xmark"></i> Mute Audio
+    </button>
+    <button class="audio-option-btn" data-sound="whitenoise">
+      <i class="fa-solid fa-wind"></i> White Noise
+    </button>
+    <button class="audio-option-btn" data-sound="waterfall">
+      <i class="fa-solid fa-water"></i> Waterfall
+    </button>
+    <button class="audio-option-btn" data-sound="thunderstorm">
+      <i class="fa-solid fa-cloud-bolt"></i> Thunderstorm Rain
+    </button>
+  </div>
+
+  <!-- ==========================================================================
+       1. HERO SECTION WITH PROMINENT HEADINGS & WEIGHTED CAROUSEL
+       ========================================================================== -->
+  <section class="hero-section" id="hero">
+    <div class="carousel-container">
+
+
+
+      <!-- Slide 1 -->
+      <div class="carousel-slide active" data-index="1">
+        <img src="assets/images/growth_plant_sunlight.jpg" alt="Tender Sprout in Sunlight" class="slide-bg-img">
+        <div class="slide-overlay-content">
+          <!-- <span class="slide-tag"><i class="fa-solid fa-people-roof"></i> Support</span> -->
+          <h1 class="slide-title">Ready when you are</h1>
+          <p class="slide-desc">
+            Hello, I'm Joel. This website is intended to provide a step by step process to get your resume done!
+          </p>
+          <div class="slide-btn-group">
+            <a href="#resilience-hub" class="btn-primary"><i class="fa-solid fa-arrow-right"></i> Explore 3 Steps</a>
+            <a href="#contact" class="btn-secondary"><i class="fa-solid fa-mug-hot"></i> Free Coffee Chat</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-slide" data-index="2">
+        <img src="assets/images/supportive_hands_warmth.jpg" alt="Supportive Cupped Hands with Warm Light"
+          class="slide-bg-img">
+        <div class="slide-overlay-content">
+          <!-- <span class="slide-tag"><i class="fa-solid fa-award"></i> Career Mastery</span> -->
+          <h1 class="slide-title">Your Skills & Experience Remain 100% Yours.</h1>
+          <p class="slide-desc">
+            No corporate restructuring can ever revoke the capabilities, leadership, and outcomes you have delivered.
+          </p>
+          <div class="slide-btn-group">
+            <button onclick="goToStep(3)" class="btn-primary"><i class="fa-solid fa-file-pdf"></i> Build ATS
+              Resume</button>
+            <button onclick="goToStep(1)" class="btn-secondary"><i class="fa-solid fa-pen-nib"></i> 15-Min
+              Journal</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-slide" data-index="3">
+        <img src="assets/images/peaceful_horizon_path.jpg" alt="Peaceful Path to Horizon" class="slide-bg-img">
+        <div class="slide-overlay-content">
+          <!-- <span class="slide-tag"><i class="fa-solid fa-feather"></i> Clarity</span> -->
+          <h1 class="slide-title">Your Career, <br> Your Story.</h1>
+          <p class="slide-desc">
+            To stand out of the competition, highlight what makes you, YOU!
+          </p>
+          <div class="slide-btn-group">
+            <button onclick="goToStep(1)" class="btn-primary"><i class="fa-solid fa-pen-nib"></i> 15-Min
+              Journal</button>
+            <button onclick="goToStep(3)" class="btn-secondary"><i class="fa-solid fa-file-pdf"></i> Build ATS
+              Resume</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Carousel Nav Buttons -->
+    <button class="carousel-nav-btn carousel-prev" aria-label="Previous Slide"><i
+        class="fa-solid fa-chevron-left"></i></button>
+    <button class="carousel-nav-btn carousel-next" aria-label="Next Slide"><i
+        class="fa-solid fa-chevron-right"></i></button>
+
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+      <button class="indicator-dot active" data-slide="0" aria-label="Slide 1"></button>
+      <button class="indicator-dot" data-slide="1" aria-label="Slide 2"></button>
+      <button class="indicator-dot" data-slide="2" aria-label="Slide 3"></button>
+    </div>
+
+    <div class="scroll-down-hint">
+      <span></span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       RESILIENCE HUB: STICKY PROGRESS TRACKER & STEP CONTENT
+       ========================================================================== -->
+  <section class="resilience-section" id="resilience-hub">
+    <div class="container">
+
+      <div class="section-title-wrap">
+        <span class="section-badge"><i class="fa-solid fa-shield-heart"></i> Recovery Toolkit</span>
+        <h2 class="section-title">3 Steps to Clarity</h2>
+        <p class="section-subtitle">Take control gently. Ground your mind with structured journaling, recall your
+          standout career wins, and craft your ATS-optimized resume with multiple employers and hyperlinked contacts.
+        </p>
+      </div>
+
+      <!-- Step Tracker Bar -->
+      <div class="progress-tracker-card" id="progress-tracker">
+        <div class="steps-bar">
+          <div class="steps-progress-track">
+            <div class="steps-progress-fill"></div>
+          </div>
+
+          <div class="step-item active" data-step="1">
+            <div class="step-circle">1</div>
+            <span class="step-label">1. Journal</span>
+          </div>
+
+          <div class="step-item" data-step="2">
+            <div class="step-circle">2</div>
+            <span class="step-label">2. Your Wins
+          </div>
+
+          <div class="step-item" data-step="3">
+            <div class="step-circle">3</div>
+            <span class="step-label">3. Resume</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 1 PANE: 15-MINUTE UNINTERRUPTED JOURNALING -->
+      <div class="step-content-pane active" data-step="1">
+
+        <!-- Feature Benefits Showcase (Step 1) -->
+        <div class="feature-benefits-showcase is-collapsed" id="benefits-showcase-step1">
+          <div class="showcase-header" role="button" tabindex="0" aria-expanded="false"
+            aria-controls="benefits-cards-grid-step1">
+            <div class="showcase-title-wrap">
+              <i class="fa-solid fa-sparkles" style="color: var(--primary-sage-dark);"></i>
+              <h4 class="showcase-title">Why Expressive Writing Works</h4>
+            </div>
+            <div class="showcase-header-actions">
+              <span class="showcase-badge"><i class="fa-solid fa-circle-check"></i> Clinical Evidence</span>
+              <span class="showcase-toggle-hint">
+                <i class="fa-solid fa-chevron-down showcase-chevron"></i>
+              </span>
+            </div>
+          </div>
+          <div class="benefits-cards-grid" id="benefits-cards-grid-step1">
+            <div class="benefit-card-mini">
+              <div class="benefit-mini-icon"><i class="fa-solid fa-brain"></i></div>
+              <div class="benefit-mini-content">
+                <h5>Lowers Acute Stress</h5>
+                <p>15 minutes of uninterrupted expressive writing rapidly lowers autonomic cortisol response.</p>
+              </div>
+            </div>
+            <div class="benefit-card-mini">
+              <div class="benefit-mini-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+              <div class="benefit-mini-content">
+                <h5>40% Faster Re-Employment</h5>
+                <p>Published research in <em>JAP</em> shows laid-off writers secured roles 40% faster than peers.</p>
+              </div>
+            </div>
+            <div class="benefit-card-mini">
+              <div class="benefit-mini-icon"><i class="fa-solid fa-lock"></i></div>
+              <div class="benefit-mini-content">
+                <h5>100% On-Device Privacy</h5>
+                <p>Feelings never leave your device. Zero telemetry, tracking, or network transmission.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="journal-card" id="grounding-journal-card">
+          <!-- Zen Mode Active Floating Bar -->
+          <div class="zen-mode-bar" id="zen-mode-bar">
+            <div class="zen-badge">
+              <span class="zen-pulse-indicator"></span>
+              <span><strong>Zen Focus Mode Active</strong> • Distractions Muted</span>
+            </div>
+            <button type="button" class="btn-exit-zen" id="exit-zen-btn" title="Exit Zen Mode">
+              <i class="fa-solid fa-compress"></i> Exit Zen
+            </button>
+          </div>
+
+          <div class="journal-header">
+            <div>
+              <h3>15-Minute Grounding Journal</h3>
+              <p>Write continuously without self-censoring, correcting grammar, or judging your feelings. Let it all
+                out.</p>
+            </div>
+            <div class="timer-widget" id="journal-timer-widget">
+              <div class="timer-circle-wrap">
+                <svg class="timer-svg" viewBox="0 0 100 100">
+                  <circle class="timer-bg-path" cx="50" cy="50" r="44"></circle>
+                  <circle class="timer-progress-path" cx="50" cy="50" r="44"></circle>
+                </svg>
+                <div class="timer-display" id="timer-display">15:00</div>
+              </div>
+
+              <div class="timer-controls">
+                <button class="btn-timer btn-timer-primary" id="timer-start" title="Start Timer"><i
+                    class="fa-solid fa-play"></i> Start</button>
+                <button class="btn-timer btn-timer-pause" id="timer-pause" style="display: none;" title="Pause Timer"><i
+                    class="fa-solid fa-pause"></i> Pause</button>
+                <button class="btn-timer btn-timer-reset" id="timer-reset" title="Reset Timer"><i
+                    class="fa-solid fa-rotate-left"></i> Reset</button>
+              </div>
+            </div>
+          </div>
+
+          <textarea class="journal-textarea" id="journal-input"
+            placeholder="Start typing your thoughts here... The 15-minute countdown starts automatically with your first word. Everything stays completely private on your device."></textarea>
+
+          <div class="journal-footer">
+            <span class="reassurance-pill"><i class="fa-solid fa-lock"></i> Private & Stored Locally</span>
+            <div class="journal-meta">
+              <span id="journal-word-count">0 words</span>
+            </div>
+            <div style="display: flex; gap: 0.75rem; align-items: center;">
+              <button onclick="goToStep(3)" class="btn-secondary"
+                style="font-size: 0.88rem; padding: 0.65rem 1.15rem;">Skip to Resume</button>
+              <button onclick="goToStep(2)" class="btn-primary">Professional Wins <i
+                  class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 PANE: PAST PROFESSIONAL WINS (OPTIONAL CAREER HIGHLIGHTS) -->
+      <div class="step-content-pane" data-step="2">
+
+        <!-- Feature Benefits Showcase (Step 2) -->
+        <div class="feature-benefits-showcase is-collapsed" id="benefits-showcase-step2">
+          <div class="showcase-header" role="button" tabindex="0" aria-expanded="false"
+            aria-controls="benefits-cards-grid-step2">
+            <div class="showcase-title-wrap">
+              <i class="fa-solid fa-trophy" style="color: var(--primary-sage-dark);"></i>
+              <h4 class="showcase-title">Why Documenting Past Wins Works</h4>
+            </div>
+            <div class="showcase-header-actions">
+              <span class="showcase-badge"><i class="fa-solid fa-star"></i> Optional Wins</span>
+              <span class="showcase-toggle-hint">
+                <i class="fa-solid fa-chevron-down showcase-chevron"></i>
+              </span>
+            </div>
+          </div>
+          <div class="benefits-cards-grid" id="benefits-cards-grid-step2">
+            <div class="benefit-card-mini">
+              <div class="benefit-mini-icon"><i class="fa-solid fa-bullseye"></i></div>
+              <div class="benefit-mini-content">
+                <h5>Reclaims Confidence</h5>
+                <p>Documenting verified career successes restores factual evidence of your professional impact.</p>
+              </div>
+            </div>
+            <div class="benefit-card-mini">
+              <div class="benefit-mini-icon"><i class="fa-solid fa-chart-line"></i></div>
+              <div class="benefit-mini-content">
+                <h5>High-Impact Resume Signals</h5>
+                <p>An optional "Career Highlights" section showcases top metrics and ROI within 6 seconds.</p>
+              </div>
+            </div>
+            <div class="benefit-card-mini">
+              <div class="benefit-mini-icon"><i class="fa-solid fa-sliders"></i></div>
+              <div class="benefit-mini-content">
+                <h5>100% Optional & Modular</h5>
+                <p>If skipped, the section is cleanly omitted from your resume with zero gaps or empty space.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Wins Studio Card -->
+        <div class="journal-card" style="margin-top: 1.5rem;">
+          <div class="journal-header" style="flex-direction: column; align-items: flex-start; gap: 0.75rem;">
+            <div
+              style="display: flex; justify-content: space-between; width: 100%; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+              <div>
+                <h3 style="margin: 0; display: flex; align-items: center; gap: 0.6rem; font-size: 1.6rem;">
+                  <i class="fa-solid fa-medal" style="color: var(--primary-sage);"></i> Past Professional Wins &
+                  Achievements
+                </h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0.35rem 0 0 0;">
+                  Capture 2–4 of your proudest accomplishments. These feed directly into the optional <strong>Career
+                    Highlights</strong> section of your resume.
+                </p>
+              </div>
+              <span class="reassurance-pill"
+                style="background: rgba(147, 197, 114, 0.12); color: #86efac; border-color: rgba(134, 239, 172, 0.25);">
+                <i class="fa-solid fa-circle-check"></i> Optional Step
+              </span>
+            </div>
+          </div>
+
+
+
+          <!-- Wins Textarea & Checkbox -->
+          <textarea class="journal-textarea" id="past-wins-input" rows="7"
+            style="min-height: 200px; font-size: 1rem; line-height: 1.7;" placeholder="Enter your proudest career achievements (one bullet point per line):
+• Spearheaded enterprise SaaS platform overhaul, driving 42% increase in monthly active users and $1.4M ARR.
+• Reduced API latency by 65% through caching architecture, saving $180K in annual infrastructure expenses.
+• Mentored and scaled a high-performing cross-functional team of 9 engineers across 3 time zones."></textarea>
+
+          <div class="journal-footer">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <label
+                style="display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; color: var(--text-secondary); font-size: 0.9rem;">
+                <input type="checkbox" id="include-highlights-checkbox" checked
+                  style="accent-color: var(--primary-sage); width: 17px; height: 17px;">
+                <span>Include as <strong>Career Highlights</strong> section in ATS Resume</span>
+              </label>
+            </div>
+            <div style="display: flex; gap: 0.75rem; align-items: center;">
+              <button onclick="goToStep(1)" class="btn-secondary"
+                style="padding: 0.65rem 1.15rem; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i>
+                Journal</button>
+              <button onclick="goToStep(3)" class="btn-secondary"
+                style="padding: 0.65rem 1.25rem; font-size: 0.9rem;">Skip for Now</button>
+              <button onclick="saveWinsAndProceed()" class="btn-primary"
+                style="padding: 0.65rem 1.35rem; font-size: 0.9rem;">Save & Go to Resume <i
+                  class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 PANE: REAL-TIME ATS-OPTIMIZED RESUME BUILDER -->
+      <div class="step-content-pane" data-step="3">
+
+        <!-- Feature Benefits Showcase (Collapsible on Mobile, Compact) -->
+        <div class="feature-benefits-showcase is-collapsed" id="benefits-showcase">
+          <div class="showcase-header" id="benefits-showcase-header" role="button" tabindex="0" aria-expanded="false"
+            aria-controls="benefits-cards-grid">
+            <div class="showcase-title-wrap">
+              <i class="fa-solid fa-robot" style="color: var(--primary-sage-dark);"></i>
+              <h4 class="showcase-title">Why This ATS Resume Builder Works</h4>
+            </div>
+            <div class="showcase-header-actions">
+              <span class="showcase-badge"><i class="fa-solid fa-circle-check"></i> 99% Pass</span>
+              <span class="showcase-toggle-hint">
+                <i class="fa-solid fa-chevron-down showcase-chevron" id="showcase-chevron"></i>
+              </span>
+            </div>
+          </div>
+          <div class="benefits-cards-grid" id="benefits-cards-grid">
+            <div class="benefit-card-mini">
+              <div class="benefit-mini-icon"><i class="fa-solid fa-filter"></i></div>
+              <div class="benefit-mini-content">
+                <h5>Clears ATS Robots</h5>
+                <p>Single-column layout with zero table traps that reject 75% of resumes.</p>
+              </div>
+            </div>
+            <div class="benefit-card-mini">
+              <div class="benefit-mini-icon"><i class="fa-solid fa-link"></i></div>
+              <div class="benefit-mini-content">
+                <h5>Active Hyperlinks</h5>
+                <p>Clickable phone, email, and LinkedIn URLs embedded in your exported PDF.</p>
+              </div>
+            </div>
+            <div class="benefit-card-mini">
+              <div class="benefit-mini-icon"><i class="fa-solid fa-file-pdf"></i></div>
+              <div class="benefit-mini-content">
+                <h5>Crisp Vector PDF</h5>
+                <p>Standard letter PDF with sharp vector text and zero phantom blank pages.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="resume-builder-container">
+
+          <!-- Editor Form -->
+          <div class="resume-editor-card">
+            <div class="resume-editor-header">
+              <div>
+                <h3>ATS Resume Editor</h3>
+                <p style="margin-bottom: 0; font-size: 0.95rem;">Fill in your details below. When ready, click "Preview
+                  & Print PDF" to view your formatted ATS resume in a clean preview modal with your latest text.</p>
+              </div>
+              <button type="button" class="btn-primary open-preview-modal-trigger" id="open-preview-modal-btn">
+                <i class="fa-solid fa-file-pdf"></i> Preview & Print PDF
+              </button>
+            </div>
+
+            <div class="resume-tabs">
+              <button class="resume-tab-btn active" data-tab="tab-personal">1. Personal Info</button>
+              <button class="resume-tab-btn" data-tab="tab-summary">2. Summary</button>
+              <button class="resume-tab-btn" data-tab="tab-highlights">3. Highlights (Optional)</button>
+              <button class="resume-tab-btn" data-tab="tab-experience">4. Experience</button>
+              <button class="resume-tab-btn" data-tab="tab-education">5. Education</button>
+              <button class="resume-tab-btn" data-tab="tab-skills">6. Skills</button>
+              <button class="resume-tab-btn" data-tab="tab-hobbies">7. Hobbies</button>
+            </div>
+
+            <!-- Tab 1: Personal -->
+            <div class="tab-pane active" id="tab-personal">
+              <div class="form-group">
+                <label class="form-label" for="resume-name-input">Full Name (Used for PDF filename)</label>
+                <input type="text" class="form-input" id="resume-name-input" placeholder="e.g. Jane Doe">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="resume-title-input">Professional Title</label>
+                <input type="text" class="form-input" id="resume-title-input" placeholder="e.g. Senior Product Manager">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="resume-email-input">Email Address (Hyperlinked as mailto: in PDF)</label>
+                <input type="email" class="form-input" id="resume-email-input" placeholder="e.g. janedoe@example.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="resume-phone-input">Phone Number (Hyperlinked as tel: in PDF)</label>
+                <input type="text" class="form-input" id="resume-phone-input" placeholder="e.g. (555) 123-4567">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="resume-location-input">Location</label>
+                <input type="text" class="form-input" id="resume-location-input" placeholder="e.g. San Francisco, CA">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="resume-linkedin-input">LinkedIn Profile URL or Username</label>
+                <input type="text" class="form-input" id="resume-linkedin-input"
+                  placeholder="e.g. https://linkedin.com/in/janedoe or janedoe">
+                <small style="color: var(--text-muted); display: block; margin-top: 0.35rem; font-size: 0.85rem;">
+                  Only your username will be displayed in the PDF, but clicking it will open your full LinkedIn profile.
+                </small>
+              </div>
+            </div>
+
+            <!-- Tab 2: Summary -->
+            <div class="tab-pane" id="tab-summary">
+              <div class="form-group">
+                <label class="form-label" for="resume-summary-input">Professional Summary</label>
+                <textarea class="form-textarea" id="resume-summary-input" rows="5"
+                  placeholder="Summarize your key strengths, years of expertise, and core value proposition..."></textarea>
+              </div>
+            </div>
+
+            <!-- Tab 3: Highlights (Optional) -->
+            <div class="tab-pane" id="tab-highlights">
+              <div class="form-group">
+                <div
+                  style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem; flex-wrap: wrap; gap: 0.5rem;">
+                  <label class="form-label" for="resume-highlights-input" style="margin-bottom: 0;">Key Career
+                    Highlights (Optional)</label>
+                  <label
+                    style="display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;">
+                    <input type="checkbox" id="resume-highlights-toggle" checked
+                      style="accent-color: var(--primary-sage); width: 16px; height: 16px;">
+                    <span>Show Career Highlights on Resume</span>
+                  </label>
+                </div>
+                <textarea class="form-textarea" id="resume-highlights-input" rows="6"
+                  placeholder="• Spearheaded enterprise SaaS platform overhaul, driving 42% increase in monthly active users and $1.4M ARR.&#10;• Reduced API latency by 65% through caching architecture, saving $180K in annual infrastructure expenses.&#10;• Mentored and scaled a high-performing cross-functional team of 9 engineers across 3 time zones."></textarea>
+                <small style="color: var(--text-muted); display: block; margin-top: 0.5rem; font-size: 0.85rem;">
+                  One bullet point per line. Synced live with Step 2 (Professional Wins). If left blank or unchecked,
+                  this section is cleanly omitted from the ATS document.
+                </small>
+              </div>
+            </div>
+
+            <!-- Tab 4: Experience (Multiple Employers) -->
+            <div class="tab-pane" id="tab-experience">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+                <div>
+                  <h4 style="margin: 0; font-size: 1.1rem; color: var(--text-main);">Work Experience</h4>
+                  <small style="color: var(--text-muted);">Add up to 6 employers (most recent first).</small>
+                </div>
+                <button type="button" id="add-employer-btn" class="btn-primary"
+                  style="padding: 0.5rem 1rem; font-size: 0.88rem;">
+                  <i class="fa-solid fa-plus"></i> Add Employer
+                </button>
+              </div>
+
+              <!-- Dynamic Multi-Employer Cards Container -->
+              <div id="employers-container" class="employers-container">
+                <!-- Dynamically populated by app.js -->
+              </div>
+            </div>
+
+            <!-- Tab 5: Education -->
+            <div class="tab-pane" id="tab-education">
+              <div class="form-group">
+                <label class="form-label" for="resume-edu-input">Education & Certifications</label>
+                <textarea class="form-textarea" id="resume-edu-input" rows="6"
+                  placeholder="• B.S. in Computer Science | University of California (2016 - 2020)&#10;• Certified Scrum Product Owner (CSPO) | Scrum Alliance"></textarea>
+              </div>
+            </div>
+
+            <!-- Tab 6: Skills -->
+            <div class="tab-pane" id="tab-skills">
+              <div class="form-group">
+                <label class="form-label" for="resume-skills-input">Core Competencies & Skills (Comma separated)</label>
+                <textarea class="form-textarea" id="resume-skills-input" rows="5"
+                  placeholder="Product Strategy, Agile Roadmap, User Research, Cross-Functional Leadership, Data Analytics, Jira, SQL"></textarea>
+              </div>
+            </div>
+
+            <!-- Tab 7: Hobbies & Interests -->
+            <div class="tab-pane" id="tab-hobbies">
+              <div class="form-group">
+                <label class="form-label" for="resume-hobbies-input">Hobbies & Personal Interests</label>
+                <textarea class="form-textarea" id="resume-hobbies-input" rows="5"
+                  placeholder="Marathon running, Landscape photography, Mentoring junior engineers, Open-source contributor, Chess"></textarea>
+                <small style="color: var(--text-muted); display: block; margin-top: 0.5rem; font-size: 0.85rem;">
+                  Separate with commas or new lines. Humanizes your executive profile while maintaining clean ATS
+                  scannability.
+                </small>
+              </div>
+            </div>
+
+            <!-- Editor Card Bottom Actions -->
+            <div class="resume-editor-bottom-actions">
+              <span class="auto-save-hint">
+                <i class="fa-solid fa-shield-heart" style="color: var(--primary-sage);"></i> ATS-friendly format •
+                Private & stored locally
+              </span>
+              <button type="button" class="btn-primary open-preview-modal-trigger" id="open-preview-modal-bottom-btn"
+                style="padding: 0.75rem 1.6rem; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.6rem;">
+                <i class="fa-solid fa-eye"></i> Preview & Print PDF
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       5. VIDEO GALLERY & ENCOURAGEMENT HUB
+       ========================================================================== -->
+  <section class="videos-section" id="video-gallery">
+    <div class="container">
+
+      <div class="section-title-wrap">
+        <span class="section-badge" style="background: var(--accent-amber-light); color: var(--accent-amber);"><i
+            class="fa-solid fa-play"></i> Media Hub</span>
+        <h2 class="section-title">Inspiring Voices</h2>
+        <p class="section-subtitle">Handpicked perspective shifts, emotional grounding, and tactical transition
+          strategies from trusted voices.</p>
+      </div>
+
+
+
+      <div class="video-grid">
+
+        <!-- Video 1 -->
+        <div class="video-card" data-youtube-id="UF8uR6Z6KLc">
+          <div class="video-thumb-wrap">
+            <img src="https://img.youtube.com/vi/UF8uR6Z6KLc/hqdefault.jpg" alt="Steve Jobs Commencement"
+              class="video-thumb-img">
+            <div class="play-icon-overlay"><i class="fa-solid fa-play"></i></div>
+          </div>
+          <div class="video-card-body">
+            <span class="video-tag">Mindset</span>
+            <h4 class="video-card-title">Connecting the Dots in Setbacks</h4>
+            <div class="video-speaker">Steve Jobs • Stanford Commencement</div>
+          </div>
+        </div>
+
+        <!-- Video 2 -->
+        <div class="video-card" data-youtube-id="XZ5NaZ2Ucdo">
+          <div class="video-thumb-wrap">
+            <img src="https://img.youtube.com/vi/XZ5NaZ2Ucdo/hqdefault.jpg" alt="Simon Sinek Finding Your Purpose"
+              class="video-thumb-img" loading="lazy">
+            <div class="play-icon-overlay"><i class="fa-solid fa-play"></i></div>
+          </div>
+          <div class="video-card-body">
+            <span class="video-tag">Career Strategy</span>
+            <h4 class="video-card-title">Finding Your Purpose & Next Direction</h4>
+            <div class="video-speaker">Simon Sinek • High Performance</div>
+          </div>
+        </div>
+
+        <!-- Video 3 -->
+        <div class="video-card" data-youtube-id="iCvmsMzlF7o">
+          <div class="video-thumb-wrap">
+            <img src="https://img.youtube.com/vi/iCvmsMzlF7o/hqdefault.jpg" alt="Brené Brown Vulnerability"
+              class="video-thumb-img" loading="lazy">
+            <div class="play-icon-overlay"><i class="fa-solid fa-play"></i></div>
+          </div>
+          <div class="video-card-body">
+            <span class="video-tag">Emotional Strength</span>
+            <h4 class="video-card-title">The Power of Self-Compassion</h4>
+            <div class="video-speaker">Brené Brown • TED Talk</div>
+          </div>
+        </div>
+
+        <!-- Video 4 -->
+        <div class="video-card" data-youtube-id="iFqaO1GkOUo">
+          <div class="video-thumb-wrap">
+            <img src="https://img.youtube.com/vi/iFqaO1GkOUo/hqdefault.jpg" alt="Jordan Peterson Daily Routine"
+              class="video-thumb-img" loading="lazy">
+            <div class="play-icon-overlay"><i class="fa-solid fa-play"></i></div>
+          </div>
+          <div class="video-card-body">
+            <span class="video-tag">Focus & Routine</span>
+            <h4 class="video-card-title">Create a Daily Schedule & Stick To It</h4>
+            <div class="video-speaker">Jordan Peterson • Practical Structure</div>
+          </div>
+        </div>
+
+        <!-- Video 5 -->
+        <div class="video-card" data-youtube-id="L5lsYI0Q8zw">
+          <div class="video-thumb-wrap">
+            <img src="https://img.youtube.com/vi/L5lsYI0Q8zw/hqdefault.jpg"
+              alt="Harvard Business Review Identity Crisis" class="video-thumb-img" loading="lazy">
+            <div class="play-icon-overlay"><i class="fa-solid fa-play"></i></div>
+          </div>
+          <div class="video-card-body">
+            <span class="video-tag">Perspective</span>
+            <h4 class="video-card-title">Identity Crisis: Don't Define Yourself by Your Job</h4>
+            <div class="video-speaker">Harvard Business Review</div>
+          </div>
+        </div>
+
+        <!-- Video 6 -->
+        <div class="video-card" data-youtube-id="maG5Q0EG7ik">
+          <div class="video-thumb-wrap">
+            <img src="https://img.youtube.com/vi/maG5Q0EG7ik/hqdefault.jpg" alt="Oliver Burkeman Time Management"
+              class="video-thumb-img" loading="lazy">
+            <div class="play-icon-overlay"><i class="fa-solid fa-play"></i></div>
+          </div>
+          <div class="video-card-body">
+            <span class="video-tag">Time Management</span>
+            <h4 class="video-card-title">5 Time Management Principles for Transitions</h4>
+            <div class="video-speaker">Oliver Burkeman • BBC Maestro</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       7. CONTACT & MENTORSHIP SECTION
+       ========================================================================== -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+
+      <div class="section-title-wrap">
+        <span class="section-badge"><i class="fa-solid fa-handshake-angle"></i> Mentorship</span>
+        <h2 class="section-title">Connect & Heal</h2>
+        <p class="section-subtitle">Need an honest resume look, a mock interview practice session, or simply someone who
+          will listen without judgment? Reach out below.</p>
+      </div>
+
+
+      <div class="contact-card">
+
+
+
+        <form id="contact-form">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+            <div class="form-group">
+              <label class="form-label" for="contact-name">Your Full Name</label>
+              <input type="text" class="form-input" id="contact-name" placeholder="Alex Morgan" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contact-email">Your Email Address</label>
+              <input type="email" class="form-input" id="contact-email" placeholder="alex@example.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contact-topic">What can I support you with?</label>
+            <select class="form-select" id="contact-topic">
+              <option value="Resume & Portfolio Review">Resume & Portfolio Review</option>
+              <option value="Mock Interview / Strategy Coffee Chat">1-on-1 Coffee Chat & Career Strategy</option>
+              <option value="General Encouragement & Venting">General Support / Listening Ear</option>
+              <option value="Other">Other Inquiry</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contact-message">Your Message</label>
+            <textarea class="form-textarea" id="contact-message" rows="4"
+              placeholder="Share anything on your mind. How can I help you today?" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width: 100%; font-size: 1.05rem; padding: 1.15rem;">
+            <i class="fa-solid fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       MODAL LIGHTBOX (VIDEOS)
+       ========================================================================== -->
+  <div class="modal-overlay" id="video-modal">
+    <div class="modal-content">
+      <button class="modal-close-btn" id="modal-close" aria-label="Close Video">&times;</button>
+      <div class="video-container-responsive">
+        <iframe id="video-iframe" src=""
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==========================================================================
+       MODAL LIGHTBOX (CALM BOX BREATHING 4:4:4:4)
+       ========================================================================== -->
+  <div class="modal-overlay" id="breathing-modal">
+    <div class="modal-content breathing-modal-content">
+      <button class="modal-close-btn" id="breathing-close" aria-label="Close Breathing Exercise">&times;</button>
+
+      <div class="breathing-header">
+        <span class="breathing-badge"><i class="fa-solid fa-wind"></i> 4:4:4:4 Box Cadence</span>
+        <h3 class="breathing-title">Calm Breathing (4:4:4:4)</h3>
+        <p class="breathing-subtitle">Sync your breath with the circular doughnut guide and live countdown to reset your
+          nervous system.</p>
+      </div>
+
+      <!-- Doughnut Progress Bar & Expanding Circle Container -->
+      <div class="breathing-stage-wrapper">
+        <div class="breathing-doughnut-box">
+          <svg class="breathing-doughnut-svg" viewBox="0 0 200 200">
+            <!-- Background Track -->
+            <circle class="breathing-track" cx="100" cy="100" r="88"></circle>
+            <!-- Animated Doughnut Progress Ring -->
+            <circle class="breathing-progress-bar" id="breathing-progress-bar" cx="100" cy="100" r="88"></circle>
+          </svg>
+
+          <!-- Inner Breathing Pulse Orb with Countdown -->
+          <div class="breathing-circle-wrap" id="breathing-circle">
+            <div class="breathing-inner-content">
+              <span class="breathing-phase-label" id="breathing-instruction">Get Ready</span>
+              <span class="breathing-countdown" id="breathing-countdown">4</span>
+              <span class="breathing-seconds-tag">seconds</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ==========================================================================
+       MODAL LIGHTBOX (ATS RESUME PREVIEW & PRINT)
+       ========================================================================== -->
+  <div class="modal-overlay" id="resume-preview-modal">
+    <div class="modal-content resume-preview-modal-content">
+      <div class="resume-modal-header">
+        <div class="resume-modal-title-wrap">
+          <span class="breathing-badge"
+            style="background: rgba(82, 168, 122, 0.18); border-color: rgba(82, 168, 122, 0.4); color: #86efac;">
+            <i class="fa-solid fa-file-lines"></i> Resume
+          </span>
+          <h3 id="resume-modal-title" style="margin: 0; font-size: 1.35rem; color: #ffffff;">Jane - Resume.pdf</h3>
+        </div>
+        <div class="resume-modal-actions">
+          <button type="button" class="btn-primary" id="print-resume-btn" title="Print or Save as PDF"
+            style="padding: 0.6rem 1.35rem; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-print"></i> Print
+          </button>
+          <button type="button" class="resume-modal-close-btn" id="resume-preview-close"
+            aria-label="Close Resume Preview">&times;</button>
+        </div>
+      </div>
+
+      <div class="resume-modal-body">
+        <!-- Standard Single-Column ATS Printable Document with Minimal Borders and Hyperlinks -->
+        <div class="resume-paper" id="resume-preview-document">
+          <!-- Header: Name & Title -->
+          <div class="ats-name" id="preview-name">Jane Doe</div>
+          <div class="ats-title" id="preview-title">Senior Product Manager</div>
+
+          <!-- Contact Bar with Active Hyperlinks -->
+          <div class="ats-contact" id="preview-contact">
+            <span class="ats-contact-item"><a href="tel:5551234567" class="ats-link" id="preview-link-phone">(555)
+                123-4567</a></span>
+            <span class="ats-separator">•</span>
+            <span class="ats-contact-item"><a href="mailto:janedoe@example.com" class="ats-link"
+                id="preview-link-email">janedoe@example.com</a></span>
+            <span class="ats-separator">•</span>
+            <span class="ats-contact-item"><a href="https://linkedin.com/in/janedoe" target="_blank"
+                rel="noopener noreferrer" class="ats-link" id="preview-link-linkedin">janedoe</a></span>
+            <span class="ats-separator">•</span>
+            <span class="ats-contact-item" id="preview-location">San Francisco, CA</span>
+          </div>
+
+          <!-- 1. PROFESSIONAL SUMMARY -->
+          <div class="ats-section" id="ats-section-summary">
+            <div class="ats-section-title">Professional Summary</div>
+            <div class="ats-summary" id="preview-summary">
+              Resilient and strategic Senior Product Manager with 6+ years of experience leading cross-functional
+              design and engineering teams. Track record of delivering scalable web platforms, driving user
+              engagement, and mentoring high-performing teams.
+            </div>
+          </div>
+
+          <!-- CAREER HIGHLIGHTS (OPTIONAL) -->
+          <div class="ats-section" id="ats-section-highlights" style="display: none;">
+            <div class="ats-section-title">Career Highlights</div>
+            <div id="preview-highlights"></div>
+          </div>
+
+          <!-- 2. CORE COMPETENCIES & SKILLS -->
+          <div class="ats-section" id="ats-section-skills">
+            <div class="ats-section-title">Core Competencies & Skills</div>
+            <div id="preview-skills">
+              <div class="ats-skills-grid">
+                <span class="ats-skill-badge">Product Strategy</span>
+                <span class="ats-skill-badge">Agile Roadmap</span>
+                <span class="ats-skill-badge">User Research</span>
+                <span class="ats-skill-badge">Cross-Functional Leadership</span>
+                <span class="ats-skill-badge">Data Analytics</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. WORK EXPERIENCE (Multiple Employers) -->
+          <div class="ats-section" id="ats-section-experience">
+            <div class="ats-section-title">Work Experience</div>
+            <div id="preview-experience"></div>
+          </div>
+
+          <!-- 4. EDUCATION & CERTIFICATIONS -->
+          <div class="ats-section" id="ats-section-education">
+            <div class="ats-section-title">Education & Certifications</div>
+            <div id="preview-education"></div>
+          </div>
+
+          <!-- 5. HOBBIES & INTERESTS -->
+          <div class="ats-section" id="ats-section-hobbies">
+            <div class="ats-section-title">Hobbies & Interests</div>
+            <div class="ats-hobbies" id="preview-hobbies">
+              Marathon running, Landscape photography, Mentoring junior engineers, Open-source contributor, Chess
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==========================================================================
+       FOOTER & CALMING QUOTES BANNER
+       ========================================================================== -->
+  <aside class="footer-quotes-banner">
+    <div class="container">
+      <div class="footer-quote">
+        "You are allowed to be a work in progress and a masterpiece at the same time."
+      </div>
+
+    </div>
+  </aside>
+
+  <footer class="main-footer">
+    <div class="container">
+      <p>&copy; 2026 ♡ <a href="https://joelabc.com" target="_blank" rel="noopener noreferrer">joelabc</a></p>
+    </div>
+  </footer>
+
+  <!-- Zen Mode Screen Overlay -->
+  <div class="zen-mode-overlay" id="zen-mode-overlay"></div>
+
+  <!-- Application Script -->
+  <script src="app.js"></script>
+
+</body>
+
+</html>
