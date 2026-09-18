@@ -211,7 +211,7 @@ When you click **"Preview & Print PDF"**, a modal lightbox will present your for
 | **Destination** | **Save as PDF** | Generates a clean digital document |
 | **Pages** | **All** | Automatically scales across pages |
 | **Paper Size** | **Letter** (US) or **A4** (International) | Matches ATS standard document dimensions |
-| **Margins** | **None** or **Default** | The built-in CSS `@page` margin (`0.5in 0.55in`) already specifies perfect margins |
+| **Margins** | **None** or **Default** | Built-in CSS handles clean 0.5" margins matching the preview |
 | **Background Graphics** | **Checked / Enabled** | Ensures subtle divider lines and skills badge backgrounds are visible |
 | **Headers & Footers** | **Unchecked / Disabled** | Prevents the browser from printing URL strings, dates, and page numbers at the top/bottom |
 
@@ -224,24 +224,30 @@ When saved, your browser will automatically propose `<YourFirstName> - Resume.pd
 ```
 riseUp/
 ├── index.html           # Semantic single-page application structure
-├── styles.css           # Comprehensive design system, theme tokens, and print engine
-├── app.js               # Reactive logic, audio synthesis, resume pagination, and title hooks
-├── favicon.svg          # Master vector RiseUp logo favicon
 ├── favicon.ico          # Multi-resolution fallback favicon
 ├── assets/
+│   ├── css/
+│   │   └── styles.css   # Comprehensive design system, theme tokens, and print engine
+│   ├── js/
+│   │   └── app.js       # Reactive logic, audio synthesis, resume pagination, and title hooks
 │   └── images/          # RiseUp icon suite and calming photography
 │       ├── favicon.svg
+│       ├── favicon-16x16.png
 │       ├── favicon-32x32.png
 │       ├── favicon-192x192.png
+│       ├── favicon-512x512.png
 │       ├── apple-touch-icon.png
+│       ├── og-image.png
 │       ├── calm_lake_sunrise.jpg
 │       ├── growth_plant_sunlight.jpg
 │       ├── peaceful_horizon_path.jpg
 │       └── supportive_hands_warmth.jpg
+├── CNAME                # Custom domain configuration for GitHub Pages
+├── LICENSE              # MIT License
 └── README.md            # Project setup, philosophy, and documentation
 ```
 
-### Script & Styling Modules in `app.js` and `styles.css`:
+### Script & Styling Modules in `assets/js/app.js` and `assets/css/styles.css`:
 1. **Theme Switcher**: Dark / Light theme detection with `localStorage` persistence.
 2. **Hero Perspective Slider**: Touch- and click-responsive carousel with navigation dots.
 3. **Breathing Engine**: SVG circle circumference math (`strokeDashoffset`), phase coordinator, and audio timer.

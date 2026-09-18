@@ -390,6 +390,179 @@ function initResumeBuilder() {
     }
   }
 
+  // Helper: Tab badges for skipped fields and format errors
+  function updateTabBadges() {
+    const tabButtons = document.querySelectorAll('.resume-tab-btn');
+    tabButtons.forEach(btn => {
+      const tabId = btn.dataset.tab;
+      const pane = document.getElementById(tabId);
+      if (!pane) return;
+
+      const fields = pane.querySelectorAll('.form-input, .form-textarea');
+      let skippedCount = 0;
+      let errorCount = 0;
+
+      fields.forEach(field => {
+        const val = (field.value || '').trim();
+        if (!val) {
+          skippedCount++;
+        } else if (field.classList.contains('input-invalid')) {
+          errorCount++;
+        }
+      });
+
+      const badge = btn.querySelector('.tab-skipped-badge');
+      if (badge) {
+        if (errorCount > 0) {
+          badge.textContent = `⚠️ Error`;
+          badge.style.display = 'inline-flex';
+          badge.style.color = '#ef4444';
+          badge.style.background = 'rgba(239, 68, 68, 0.18)';
+        } else if (skippedCount > 0) {
+          badge.textContent = `${skippedCount} skipped`;
+          badge.style.display = 'inline-flex';
+          badge.style.color = '';
+          badge.style.background = '';
+        } else {
+          badge.textContent = '';
+          badge.style.display = 'none';
+        }
+      }
+    });
+  }
+
+  // Helper: Live character counting and field validation / skipped warnings
+  function setupFieldValidationAndCounter(inputEl) {
+    if (!inputEl) return;
+    const parentGroup = inputEl.closest('.form-group') || inputEl.parentElement;
+    const counterEl = parentGroup ? parentGroup.querySelector('.char-counter') : null;
+    const feedbackEl = parentGroup ? parentGroup.querySelector('.field-feedback') : null;
+    const maxLen = parseInt(inputEl.getAttribute('maxlength'), 10) || 0;
+
+    function updateCounter() {
+      if (!counterEl || !maxLen) return;
+      const currentLen = inputEl.value.length;
+      counterEl.textContent = `${currentLen} / ${maxLen}`;
+      if (currentLen >= maxLen) {
+        counterEl.classList.add('at-limit');
+        counterEl.classList.remove('approaching-limit');
+      } else if (currentLen >= Math.floor(maxLen * 0.85)) {
+        counterEl.classList.add('approaching-limit');
+        counterEl.classList.remove('at-limit');
+      } else {
+        counterEl.classList.remove('at-limit', 'approaching-limit');
+      }
+    }
+
+    function validateField(trigger) {
+      const val = inputEl.value.trim();
+      const isBlank = val === '';
+
+      // Case 1: Field is blank / skipped
+      if (isBlank) {
+        inputEl.classList.remove('input-invalid', 'input-valid');
+        inputEl.removeAttribute('aria-invalid');
+
+        if (trigger === 'blur' || trigger === 'check') {
+          inputEl.classList.add('input-warning');
+          if (feedbackEl) {
+            let msg = 'Field left blank — this will be omitted or use default in your ATS resume.';
+            if (inputEl.id === 'resume-highlights-input') {
+              msg = 'Optional field left blank — highlights will be omitted from your ATS resume.';
+            } else if (inputEl.id === 'resume-hobbies-input') {
+              msg = 'Optional field left blank — hobbies will be omitted from your ATS resume.';
+            }
+            feedbackEl.className = 'field-feedback warning-feedback';
+            feedbackEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> ${msg}`;
+          }
+        } else if (trigger === 'input') {
+          inputEl.classList.remove('input-warning');
+          if (feedbackEl) {
+            feedbackEl.className = 'field-feedback';
+            feedbackEl.innerHTML = '';
+          }
+        }
+        return { valid: true, skipped: true };
+      }
+
+      // Case 2: Field is NOT blank
+      inputEl.classList.remove('input-warning');
+
+      let hasFormatError = false;
+      let errorMsg = '';
+
+      // Email validation
+      if (inputEl.type === 'email' || inputEl.id === 'resume-email-input') {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(val)) {
+          hasFormatError = true;
+          errorMsg = 'Please enter a valid email address (e.g. janedoe@example.com)';
+        }
+      }
+      // Phone validation
+      else if (inputEl.type === 'tel' || inputEl.id === 'resume-phone-input') {
+        const digits = (val.match(/\d/g) || []).length;
+        const validPhoneChars = /^[0-9+()\s.-]+$/.test(val);
+        if (!validPhoneChars || digits < 7) {
+          hasFormatError = true;
+          errorMsg = 'Please enter a valid phone number (at least 7 digits)';
+        }
+      }
+      // LinkedIn validation
+      else if (inputEl.id === 'resume-linkedin-input') {
+        if (/\s/.test(val) || val.length < 2) {
+          hasFormatError = true;
+          errorMsg = 'Please enter a valid LinkedIn URL or username (no spaces)';
+        }
+      }
+      // Full Name validation
+      else if (inputEl.id === 'resume-name-input') {
+        if (!/[a-zA-Z]/.test(val) || val.length < 2) {
+          hasFormatError = true;
+          errorMsg = 'Please enter at least 2 characters for your full name';
+        }
+      }
+
+      if (hasFormatError) {
+        inputEl.classList.add('input-invalid');
+        inputEl.classList.remove('input-valid');
+        inputEl.setAttribute('aria-invalid', 'true');
+        if (feedbackEl) {
+          feedbackEl.className = 'field-feedback error-feedback';
+          feedbackEl.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${errorMsg}`;
+        }
+        return { valid: false, skipped: false };
+      } else {
+        inputEl.classList.remove('input-invalid');
+        inputEl.classList.add('input-valid');
+        inputEl.removeAttribute('aria-invalid');
+        if (feedbackEl) {
+          feedbackEl.className = 'field-feedback';
+          feedbackEl.innerHTML = '';
+        }
+        return { valid: true, skipped: false };
+      }
+    }
+
+    inputEl.addEventListener('input', () => {
+      updateCounter();
+      validateField('input');
+      updateTabBadges();
+    });
+
+    inputEl.addEventListener('blur', () => {
+      updateCounter();
+      validateField('blur');
+      updateTabBadges();
+    });
+
+    // Run initial counter update
+    updateCounter();
+
+    // Attach validator reference for batch checks
+    inputEl._validateField = validateField;
+  }
+
   function renderEmployersForm() {
     if (!employersContainer) return;
     employersContainer.innerHTML = '';
@@ -409,27 +582,47 @@ function initResumeBuilder() {
         </div>
         <div class="form-row-grid">
           <div class="form-group" style="margin-bottom: 1rem;">
-            <label class="form-label">Job Title / Role</label>
-            <input type="text" class="form-input emp-role-input" value="${escapeHtml(emp.role)}" placeholder="e.g. Senior Product Manager">
+            <div class="form-label-row">
+              <label class="form-label">Job Title / Role</label>
+              <span class="char-counter">${(emp.role || '').length} / 100</span>
+            </div>
+            <input type="text" class="form-input emp-role-input" maxlength="100" value="${escapeHtml(emp.role)}" placeholder="e.g. Senior Product Manager">
+            <div class="field-feedback"></div>
           </div>
           <div class="form-group" style="margin-bottom: 1rem;">
-            <label class="form-label">Company / Employer Name</label>
-            <input type="text" class="form-input emp-company-input" value="${escapeHtml(emp.company)}" placeholder="e.g. Acme Corp">
+            <div class="form-label-row">
+              <label class="form-label">Company / Employer Name</label>
+              <span class="char-counter">${(emp.company || '').length} / 100</span>
+            </div>
+            <input type="text" class="form-input emp-company-input" maxlength="100" value="${escapeHtml(emp.company)}" placeholder="e.g. Acme Corp">
+            <div class="field-feedback"></div>
           </div>
         </div>
         <div class="form-row-grid">
           <div class="form-group" style="margin-bottom: 1rem;">
-            <label class="form-label">Dates / Period</label>
-            <input type="text" class="form-input emp-dates-input" value="${escapeHtml(emp.dates)}" placeholder="e.g. 2022 – 2024">
+            <div class="form-label-row">
+              <label class="form-label">Dates / Period</label>
+              <span class="char-counter">${(emp.dates || '').length} / 50</span>
+            </div>
+            <input type="text" class="form-input emp-dates-input" maxlength="50" value="${escapeHtml(emp.dates)}" placeholder="e.g. 2022 – 2024">
+            <div class="field-feedback"></div>
           </div>
           <div class="form-group" style="margin-bottom: 1rem;">
-            <label class="form-label">Location</label>
-            <input type="text" class="form-input emp-loc-input" value="${escapeHtml(emp.location)}" placeholder="e.g. San Francisco, CA">
+            <div class="form-label-row">
+              <label class="form-label">Location</label>
+              <span class="char-counter">${(emp.location || '').length} / 100</span>
+            </div>
+            <input type="text" class="form-input emp-loc-input" maxlength="100" value="${escapeHtml(emp.location)}" placeholder="e.g. San Francisco, CA">
+            <div class="field-feedback"></div>
           </div>
         </div>
         <div class="form-group" style="margin-bottom: 0;">
-          <label class="form-label">Key Accomplishments & Bullet Points</label>
-          <textarea class="form-textarea emp-bullets-input" rows="4" placeholder="• Bullet 1&#10;• Bullet 2">${escapeHtml(emp.bullets)}</textarea>
+          <div class="form-label-row">
+            <label class="form-label">Key Accomplishments & Bullet Points</label>
+            <span class="char-counter">${(emp.bullets || '').length} / 2000</span>
+          </div>
+          <textarea class="form-textarea emp-bullets-input" maxlength="2000" rows="4" placeholder="• Bullet 1&#10;• Bullet 2">${escapeHtml(emp.bullets)}</textarea>
+          <div class="field-feedback"></div>
         </div>
       `;
 
@@ -446,11 +639,17 @@ function initResumeBuilder() {
       locInput.addEventListener('input', () => { emp.location = locInput.value; });
       bulletsInput.addEventListener('input', () => { emp.bullets = bulletsInput.value; });
 
+      // Attach validation & counter to each employer input
+      [roleInput, companyInput, datesInput, locInput, bulletsInput].forEach(inp => {
+        if (inp) setupFieldValidationAndCounter(inp);
+      });
+
       const removeBtn = card.querySelector('.btn-remove-employer');
       if (removeBtn) {
         removeBtn.addEventListener('click', () => {
           employers = employers.filter(e => e.id !== emp.id);
           renderEmployersForm();
+          updateTabBadges();
           showToast(`🗑️ Employer removed (${employers.length}/${MAX_EMPLOYERS})`);
         });
       }
@@ -459,6 +658,7 @@ function initResumeBuilder() {
     });
 
     updateAddEmployerBtnState();
+    updateTabBadges();
   }
 
   if (addEmployerBtn) {
@@ -500,6 +700,7 @@ function initResumeBuilder() {
       btn.classList.add('active');
       const targetPane = document.getElementById(btn.dataset.tab);
       if (targetPane) targetPane.classList.add('active');
+      updateTabBadges();
     });
   });
 
@@ -866,12 +1067,36 @@ function initResumeBuilder() {
     updatePreview();
     // 3. Set the PDF document title while preview is active
     updateResumeTitles();
-    // 4. Display modal first so DOM is visible for accurate layout calculation
+    // 4. Batch validate all fields (highlight skipped/blank as warning, errors as invalid)
+    const allInputs = document.querySelectorAll('.resume-editor-card .form-input, .resume-editor-card .form-textarea');
+    let hasFormatErrors = false;
+    let totalSkipped = 0;
+
+    allInputs.forEach(input => {
+      if (input._validateField) {
+        const res = input._validateField('check');
+        if (res && !res.valid) hasFormatErrors = true;
+        if (res && res.skipped) totalSkipped++;
+      }
+    });
+    updateTabBadges();
+
+    if (hasFormatErrors) {
+      if (typeof showToast === 'function') {
+        showToast('⚠️ Note: Please review highlighted format errors before printing');
+      }
+    } else if (totalSkipped > 0) {
+      if (typeof showToast === 'function') {
+        showToast('📄 ATS Resume preview ready • Skipped fields omitted cleanly');
+      }
+    }
+
+    // 5. Display modal first so DOM is visible for accurate layout calculation
     if (resumeModal) {
       resumeModal.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
-    // 5. Guarantee multi-page white background and page dividers after DOM reflow
+    // 6. Guarantee multi-page white background and page dividers after DOM reflow
     requestAnimationFrame(() => {
       updatePreviewPaperPagination();
     });
@@ -978,6 +1203,16 @@ function initResumeBuilder() {
       });
     }
   });
+
+  // Initialize validation and character counters on all static inputs
+  Object.values(inputs).forEach(input => {
+    if (input) {
+      setupFieldValidationAndCounter(input);
+    }
+  });
+
+  // Initial tab badges calculation
+  updateTabBadges();
 
   // Populate preview DOM once initially on load
   updatePreview();

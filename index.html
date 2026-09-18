@@ -60,7 +60,7 @@
   </script>
 
   <!-- Application Stylesheet -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
@@ -133,23 +133,10 @@
 
 
 
-      <!-- Slide 1 -->
-      <div class="carousel-slide active" data-index="1">
-        <img src="assets/images/growth_plant_sunlight.jpg" alt="Tender Sprout in Sunlight" class="slide-bg-img">
-        <div class="slide-overlay-content">
-          <!-- <span class="slide-tag"><i class="fa-solid fa-people-roof"></i> Support</span> -->
-          <h1 class="slide-title">Ready when you are</h1>
-          <p class="slide-desc">
-            Hello, I'm Joel. This website is intended to provide a step by step process to get your resume done!
-          </p>
-          <div class="slide-btn-group">
-            <a href="#resilience-hub" class="btn-primary"><i class="fa-solid fa-arrow-right"></i> Explore 3 Steps</a>
-            <!-- <a href="#contact" class="btn-secondary"><i class="fa-solid fa-mug-hot"></i> Free Coffee Chat</a> -->
-          </div>
-        </div>
-      </div>
 
-      <!-- Slide 2 -->
+
+
+      <!-- Slide 1 -->
       <div class="carousel-slide" data-index="2">
         <img src="assets/images/supportive_hands_warmth.jpg" alt="Supportive Cupped Hands with Warm Light"
           class="slide-bg-img">
@@ -157,7 +144,7 @@
           <!-- <span class="slide-tag"><i class="fa-solid fa-award"></i> Career Mastery</span> -->
           <h1 class="slide-title">Your Skills & Experience Remain 100% Yours.</h1>
           <p class="slide-desc">
-            No corporate restructuring can ever revoke the capabilities, leadership, and outcomes you have delivered.
+            Hello, I'm Joel. This website is intended to provide a step by step process to get your resume done!
           </p>
           <div class="slide-btn-group">
             <button onclick="goToStep(3)" class="btn-primary"><i class="fa-solid fa-file-pdf"></i> Build ATS
@@ -168,38 +155,9 @@
         </div>
       </div>
 
-      <!-- Slide 3 -->
-      <div class="carousel-slide" data-index="3">
-        <img src="assets/images/peaceful_horizon_path.jpg" alt="Peaceful Path to Horizon" class="slide-bg-img">
-        <div class="slide-overlay-content">
-          <!-- <span class="slide-tag"><i class="fa-solid fa-feather"></i> Clarity</span> -->
-          <h1 class="slide-title">Your Career, <br> Your Story.</h1>
-          <p class="slide-desc">
-            To stand out of the competition, highlight what makes you, YOU!
-          </p>
-          <div class="slide-btn-group">
-            <button onclick="goToStep(1)" class="btn-primary"><i class="fa-solid fa-pen-nib"></i> 15-Min
-              Journal</button>
-            <button onclick="goToStep(3)" class="btn-secondary"><i class="fa-solid fa-file-pdf"></i> Build ATS
-              Resume</button>
-          </div>
-        </div>
-      </div>
-
     </div>
 
-    <!-- Carousel Nav Buttons -->
-    <button class="carousel-nav-btn carousel-prev" aria-label="Previous Slide"><i
-        class="fa-solid fa-chevron-left"></i></button>
-    <button class="carousel-nav-btn carousel-next" aria-label="Next Slide"><i
-        class="fa-solid fa-chevron-right"></i></button>
 
-    <!-- Indicators -->
-    <div class="carousel-indicators">
-      <button class="indicator-dot active" data-slide="0" aria-label="Slide 1"></button>
-      <button class="indicator-dot" data-slide="1" aria-label="Slide 2"></button>
-      <button class="indicator-dot" data-slide="2" aria-label="Slide 3"></button>
-    </div>
 
     <div class="scroll-down-hint">
       <span></span>
@@ -501,76 +459,108 @@
             </div>
 
             <div class="resume-tabs">
-              <button class="resume-tab-btn active" data-tab="tab-personal">1. Personal Info</button>
-              <button class="resume-tab-btn" data-tab="tab-summary">2. Summary</button>
-              <button class="resume-tab-btn" data-tab="tab-highlights">3. Highlights (Optional)</button>
-              <button class="resume-tab-btn" data-tab="tab-experience">4. Experience</button>
-              <button class="resume-tab-btn" data-tab="tab-education">5. Education</button>
-              <button class="resume-tab-btn" data-tab="tab-skills">6. Skills</button>
-              <button class="resume-tab-btn" data-tab="tab-hobbies">7. Hobbies</button>
+              <button class="resume-tab-btn active" data-tab="tab-personal">1. Personal Info <span class="tab-skipped-badge" style="display:none;"></span></button>
+              <button class="resume-tab-btn" data-tab="tab-summary">2. Summary <span class="tab-skipped-badge" style="display:none;"></span></button>
+              <button class="resume-tab-btn" data-tab="tab-highlights">3. Highlights (Optional) <span class="tab-skipped-badge" style="display:none;"></span></button>
+              <button class="resume-tab-btn" data-tab="tab-experience">4. Experience <span class="tab-skipped-badge" style="display:none;"></span></button>
+              <button class="resume-tab-btn" data-tab="tab-education">5. Education <span class="tab-skipped-badge" style="display:none;"></span></button>
+              <button class="resume-tab-btn" data-tab="tab-skills">6. Skills <span class="tab-skipped-badge" style="display:none;"></span></button>
+              <button class="resume-tab-btn" data-tab="tab-hobbies">7. Hobbies <span class="tab-skipped-badge" style="display:none;"></span></button>
             </div>
 
             <!-- Tab 1: Personal -->
             <div class="tab-pane active" id="tab-personal">
               <div class="form-group">
-                <label class="form-label" for="resume-name-input">Full Name (Used for PDF filename)</label>
-                <input type="text" class="form-input" id="resume-name-input" placeholder="e.g. Jane Doe">
+                <div class="form-label-row">
+                  <label class="form-label" for="resume-name-input">Full Name (Used for PDF filename)</label>
+                  <span class="char-counter" id="resume-name-counter">0 / 100</span>
+                </div>
+                <input type="text" class="form-input" id="resume-name-input" maxlength="100" autocomplete="name" placeholder="e.g. Jane Doe">
+                <div class="field-feedback" id="resume-name-feedback"></div>
               </div>
               <div class="form-group">
-                <label class="form-label" for="resume-title-input">Professional Title</label>
-                <input type="text" class="form-input" id="resume-title-input" placeholder="e.g. Senior Product Manager">
+                <div class="form-label-row">
+                  <label class="form-label" for="resume-title-input">Professional Title</label>
+                  <span class="char-counter" id="resume-title-counter">0 / 100</span>
+                </div>
+                <input type="text" class="form-input" id="resume-title-input" maxlength="100" autocomplete="organization-title" placeholder="e.g. Senior Product Manager">
+                <div class="field-feedback" id="resume-title-feedback"></div>
               </div>
               <div class="form-group">
-                <label class="form-label" for="resume-email-input">Email Address (Hyperlinked as mailto: in PDF)</label>
-                <input type="email" class="form-input" id="resume-email-input" placeholder="e.g. janedoe@example.com">
+                <div class="form-label-row">
+                  <label class="form-label" for="resume-email-input">Email Address (Hyperlinked as mailto: in PDF)</label>
+                  <span class="char-counter" id="resume-email-counter">0 / 100</span>
+                </div>
+                <input type="email" class="form-input" id="resume-email-input" maxlength="100" autocomplete="email" inputmode="email" placeholder="e.g. janedoe@example.com">
+                <div class="field-feedback" id="resume-email-feedback"></div>
               </div>
               <div class="form-group">
-                <label class="form-label" for="resume-phone-input">Phone Number (Hyperlinked as tel: in PDF)</label>
-                <input type="text" class="form-input" id="resume-phone-input" placeholder="e.g. (555) 123-4567">
+                <div class="form-label-row">
+                  <label class="form-label" for="resume-phone-input">Phone Number (Hyperlinked as tel: in PDF)</label>
+                  <span class="char-counter" id="resume-phone-counter">0 / 25</span>
+                </div>
+                <input type="tel" class="form-input" id="resume-phone-input" maxlength="25" autocomplete="tel" inputmode="tel" placeholder="e.g. (555) 123-4567">
+                <div class="field-feedback" id="resume-phone-feedback"></div>
               </div>
               <div class="form-group">
-                <label class="form-label" for="resume-location-input">Location</label>
-                <input type="text" class="form-input" id="resume-location-input" placeholder="e.g. San Francisco, CA">
+                <div class="form-label-row">
+                  <label class="form-label" for="resume-location-input">Location</label>
+                  <span class="char-counter" id="resume-location-counter">0 / 100</span>
+                </div>
+                <input type="text" class="form-input" id="resume-location-input" maxlength="100" autocomplete="address-level2" placeholder="e.g. San Francisco, CA">
+                <div class="field-feedback" id="resume-location-feedback"></div>
               </div>
               <div class="form-group">
-                <label class="form-label" for="resume-linkedin-input">LinkedIn Profile URL or Username</label>
-                <input type="text" class="form-input" id="resume-linkedin-input"
+                <div class="form-label-row">
+                  <label class="form-label" for="resume-linkedin-input">LinkedIn Profile URL or Username</label>
+                  <span class="char-counter" id="resume-linkedin-counter">0 / 100</span>
+                </div>
+                <input type="text" class="form-input" id="resume-linkedin-input" maxlength="100" autocomplete="url"
                   placeholder="e.g. https://linkedin.com/in/janedoe or janedoe">
                 <small style="color: var(--text-muted); display: block; margin-top: 0.35rem; font-size: 0.85rem;">
                   Only your username will be displayed in the PDF, but clicking it will open your full LinkedIn profile.
                 </small>
+                <div class="field-feedback" id="resume-linkedin-feedback"></div>
               </div>
             </div>
 
             <!-- Tab 2: Summary -->
             <div class="tab-pane" id="tab-summary">
               <div class="form-group">
-                <label class="form-label" for="resume-summary-input">Professional Summary</label>
-                <textarea class="form-textarea" id="resume-summary-input" rows="5"
+                <div class="form-label-row">
+                  <label class="form-label" for="resume-summary-input">Professional Summary</label>
+                  <span class="char-counter" id="resume-summary-counter">0 / 1000</span>
+                </div>
+                <textarea class="form-textarea" id="resume-summary-input" rows="5" maxlength="1000"
                   placeholder="Summarize your key strengths, years of expertise, and core value proposition..."></textarea>
+                <div class="field-feedback" id="resume-summary-feedback"></div>
               </div>
             </div>
 
             <!-- Tab 3: Highlights (Optional) -->
             <div class="tab-pane" id="tab-highlights">
               <div class="form-group">
-                <div
-                  style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem; flex-wrap: wrap; gap: 0.5rem;">
-                  <label class="form-label" for="resume-highlights-input" style="margin-bottom: 0;">Key Career
-                    Highlights (Optional)</label>
-                  <label
-                    style="display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;">
-                    <input type="checkbox" id="resume-highlights-toggle" checked
-                      style="accent-color: var(--primary-sage); width: 16px; height: 16px;">
-                    <span>Show Career Highlights on Resume</span>
-                  </label>
+                <div class="form-label-row">
+                  <div
+                    style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                    <label class="form-label" for="resume-highlights-input" style="margin-bottom: 0;">Key Career
+                      Highlights (Optional)</label>
+                    <label
+                      style="display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;">
+                      <input type="checkbox" id="resume-highlights-toggle" checked
+                        style="accent-color: var(--primary-sage); width: 16px; height: 16px;">
+                      <span>Show Career Highlights on Resume</span>
+                    </label>
+                  </div>
+                  <span class="char-counter" id="resume-highlights-counter">0 / 1500</span>
                 </div>
-                <textarea class="form-textarea" id="resume-highlights-input" rows="6"
+                <textarea class="form-textarea" id="resume-highlights-input" rows="6" maxlength="1500"
                   placeholder="• Spearheaded enterprise SaaS platform overhaul, driving 42% increase in monthly active users and $1.4M ARR.&#10;• Reduced API latency by 65% through caching architecture, saving $180K in annual infrastructure expenses.&#10;• Mentored and scaled a high-performing cross-functional team of 9 engineers across 3 time zones."></textarea>
                 <small style="color: var(--text-muted); display: block; margin-top: 0.5rem; font-size: 0.85rem;">
                   One bullet point per line. Synced live with Step 2 (Professional Wins). If left blank or unchecked,
                   this section is cleanly omitted from the ATS document.
                 </small>
+                <div class="field-feedback" id="resume-highlights-feedback"></div>
               </div>
             </div>
 
@@ -596,31 +586,43 @@
             <!-- Tab 5: Education -->
             <div class="tab-pane" id="tab-education">
               <div class="form-group">
-                <label class="form-label" for="resume-edu-input">Education & Certifications</label>
-                <textarea class="form-textarea" id="resume-edu-input" rows="6"
+                <div class="form-label-row">
+                  <label class="form-label" for="resume-edu-input">Education & Certifications</label>
+                  <span class="char-counter" id="resume-edu-counter">0 / 1000</span>
+                </div>
+                <textarea class="form-textarea" id="resume-edu-input" rows="6" maxlength="1000"
                   placeholder="• B.S. in Computer Science | University of California (2016 - 2020)&#10;• Certified Scrum Product Owner (CSPO) | Scrum Alliance"></textarea>
+                <div class="field-feedback" id="resume-edu-feedback"></div>
               </div>
             </div>
 
             <!-- Tab 6: Skills -->
             <div class="tab-pane" id="tab-skills">
               <div class="form-group">
-                <label class="form-label" for="resume-skills-input">Core Competencies & Skills (Comma separated)</label>
-                <textarea class="form-textarea" id="resume-skills-input" rows="5"
+                <div class="form-label-row">
+                  <label class="form-label" for="resume-skills-input">Core Competencies & Skills (Comma separated)</label>
+                  <span class="char-counter" id="resume-skills-counter">0 / 300</span>
+                </div>
+                <textarea class="form-textarea" id="resume-skills-input" rows="5" maxlength="300"
                   placeholder="Product Strategy, Agile Roadmap, User Research, Cross-Functional Leadership, Data Analytics, Jira, SQL"></textarea>
+                <div class="field-feedback" id="resume-skills-feedback"></div>
               </div>
             </div>
 
             <!-- Tab 7: Hobbies & Interests -->
             <div class="tab-pane" id="tab-hobbies">
               <div class="form-group">
-                <label class="form-label" for="resume-hobbies-input">Hobbies & Personal Interests</label>
-                <textarea class="form-textarea" id="resume-hobbies-input" rows="5"
+                <div class="form-label-row">
+                  <label class="form-label" for="resume-hobbies-input">Hobbies & Personal Interests</label>
+                  <span class="char-counter" id="resume-hobbies-counter">0 / 500</span>
+                </div>
+                <textarea class="form-textarea" id="resume-hobbies-input" rows="5" maxlength="500"
                   placeholder="Marathon running, Landscape photography, Mentoring junior engineers, Open-source contributor, Chess"></textarea>
                 <small style="color: var(--text-muted); display: block; margin-top: 0.5rem; font-size: 0.85rem;">
                   Separate with commas or new lines. Humanizes your executive profile while maintaining clean ATS
                   scannability.
                 </small>
+                <div class="field-feedback" id="resume-hobbies-feedback"></div>
               </div>
             </div>
 
@@ -987,7 +989,7 @@
   <div class="zen-mode-overlay" id="zen-mode-overlay"></div>
 
   <!-- Application Script -->
-  <script src="app.js"></script>
+  <script src="assets/js/app.js"></script>
 
 </body>
 
